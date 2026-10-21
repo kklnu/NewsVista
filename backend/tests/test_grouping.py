@@ -70,3 +70,10 @@ def test_url_normalization_is_stable():
     assert normalize_url(u1) == normalize_url(u2) == "https://www.bbc.co.uk/news/articles/abc123"
     assert article_id_for(normalize_url(u1)) == article_id_for(normalize_url(u2))
     assert normalize_url("https://x.test/a?id=5&utm_source=x") == "https://x.test/a?id=5"
+
+
+def test_npr_images_requested_at_phone_size():
+    from app.feeds import phone_sized_image
+    big = "https://npr.brightspotcdn.com/dims3/default/strip/false/crop/8116x5410+0+0/resize/8116x5410!/?url=x"
+    assert "/resize/1200/quality/80/format/jpeg/?url=x" in phone_sized_image(big)
+    assert phone_sized_image("https://i.guim.co.uk/a.jpg") == "https://i.guim.co.uk/a.jpg"

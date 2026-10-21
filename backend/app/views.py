@@ -14,6 +14,7 @@ from sqlalchemy.orm import Session
 
 from .ai.analysis import SCOPE_DISCLOSURES, fingerprint
 from .config import Settings, load_model_config
+from .feeds import phone_sized_image
 from .models import AIAnalysis, AICallLog, Article, BackgroundLink, CollectionRun, CollectionRunSource, Story, StoryArticle, StoryBackground
 from .pipeline import retained_members, to_input
 from .timeutil import iso, window_start
@@ -123,9 +124,9 @@ def _lead(story: Story, arts: list[Article]) -> Article:
 def _image(story: Story, arts: list[Article]) -> str | None:
     lead = _lead(story, arts)
     if lead.image_url:
-        return lead.image_url
+        return phone_sized_image(lead.image_url)
     with_image = [a for a in arts if a.image_url]
-    return max(with_image, key=lambda a: a.published_at).image_url if with_image else None
+    return phone_sized_image(max(with_image, key=lambda a: a.published_at).image_url) if with_image else None
 
 
 def _categories(arts: list[Article]) -> list[str]:
@@ -230,7 +231,7 @@ def story_detail(s: Session, cfg: Settings, now: datetime, story_id: str) -> dic
             "article_count": len(items),
             "articles": [
                 {"id": a.id, "title": a.title, "url": a.url, "published_at": iso(a.published_at),
-                 "image_url": a.image_url,
+                 "image_url": phone_sized_image(a.image_url),
                  "excerpt": a.excerpt, "excerpt_label": f"Excerpt from {pub}'s RSS feed (original wording)"}
                 for a in sorted(items, key=lambda a: a.published_at, reverse=True)
             ],

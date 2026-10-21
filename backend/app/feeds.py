@@ -58,6 +58,22 @@ def _clean_excerpt(text: str) -> str:
     return text
 
 
+_NPR_RESIZE = re.compile(r"/resize/\d+x\d+!?/")
+
+
+def phone_sized_image(url: str | None) -> str | None:
+    """Ask image CDNs for a phone-friendly size instead of the full original.
+
+    NPR feeds link to originals (e.g. 8116x5410) that are too large to load in a
+    card; their CDN accepts /resize/1200/ in the same URL.
+    """
+    if not url:
+        return url
+    if "brightspotcdn.com" in url:
+        return _NPR_RESIZE.sub("/resize/1200/quality/80/format/jpeg/", url, count=1)
+    return url
+
+
 _IMG = re.compile(r"<img[^>]+src=[\"']([^\"']+)[\"']", re.I)
 
 
@@ -82,7 +98,9 @@ def _image(entry) -> str | None:
         return url.replace("ichef.bbci.co.uk/ace/standard/240/", "ichef.bbci.co.uk/ace/standard/800/")
     raw = (entry.get("content") or [{}])[0].get("value") or entry.get("summary") or ""
     match = _IMG.search(raw)
-    return match.group(1).replace("&amp;", "&") if match and match.group(1).startswith("https://") else None
+    if not (match and match.group(1).startswith("https://")):
+        return None
+    return phone_sized_image(match.group(1).replace("&amp;", "&"))
 
 
 def parse_feed(content: bytes) -> list[FeedItem]:

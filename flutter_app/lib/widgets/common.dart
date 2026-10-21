@@ -235,11 +235,15 @@ class NetImage extends StatelessWidget {
       child: Icon(icon, color: Colors.white.withValues(alpha: 0.25), size: 36),
     );
     if (url == null || url!.isEmpty) return placeholder;
+    // Decode at display size (not the original resolution) to keep memory low.
+    final dpr = MediaQuery.devicePixelRatioOf(context);
+    final decodeWidth = ((width ?? MediaQuery.sizeOf(context).width) * dpr).round();
     return Image.network(
       url!,
       width: width,
       height: height,
       fit: BoxFit.cover,
+      cacheWidth: decodeWidth,
       webHtmlElementStrategy: WebHtmlElementStrategy.fallback,
       errorBuilder: (_, _, _) => placeholder,
       loadingBuilder: (_, child, progress) => progress == null ? child : placeholder,
