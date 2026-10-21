@@ -7,7 +7,8 @@ story on the server. The Flutter app only reads those stored results.
 
 | Item | Value |
 |---|---|
-| Deployed API | **NOT YET DEPLOYED** — fill in after Render deploy (see §5.3) |
+| Deployed API | https://newsvista-api.onrender.com (docs: `/docs`, status: `/status`) |
+| Web version (extra) | https://kklnu.github.io/NewsVista/ (Flutter web build on the `gh-pages` branch; the required client is the Android app) |
 | Android APK | `flutter_app/build/app/outputs/flutter-apk/app-release.apk` (build with §5.4) |
 | Scheduler | `.github/workflows/hourly-collect.yml` (hourly + manual) |
 | AI prompt + model config | `backend/ai_config/` |
