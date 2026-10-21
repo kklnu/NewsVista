@@ -1,0 +1,37 @@
+{
+  "_notice": "CONTROLLED TEST FIXTURE - these headlines and excerpts were written for testing the grouping algorithm. They are NOT live articles and do not describe real reporting. 'hours_ago' is relative to the test clock.",
+  "articles": [
+    {"id": "jp1", "group": "japan_quake", "publisher": "BBC News", "hours_ago": 10, "title": "Magnitude 6.8 earthquake strikes off northern Japan, tsunami advisory issued", "excerpt": "A strong earthquake hit off the coast of Aomori prefecture on Tuesday, prompting a tsunami advisory along Japan's Pacific coast."},
+    {"id": "jp2", "group": "japan_quake", "publisher": "NPR", "hours_ago": 8, "title": "Strong earthquake shakes northern Japan; tsunami advisory lifted hours later", "excerpt": "The magnitude 6.8 quake struck off Aomori, Japan's Meteorological Agency said. No major damage was immediately reported."},
+    {"id": "jp3", "group": "japan_quake", "publisher": "Fox News", "hours_ago": 7, "title": "Japan earthquake: 6.8 magnitude quake rattles Aomori as officials warn of aftershocks", "excerpt": "Officials in Aomori urged residents to stay away from the coast after the earthquake and tsunami advisory."},
+
+    {"id": "ecb1", "group": "ecb_cut", "publisher": "BBC News", "hours_ago": 30, "title": "European Central Bank cuts interest rates as eurozone inflation eases", "excerpt": "The ECB lowered its key deposit rate by a quarter point, citing slowing inflation across the eurozone."},
+    {"id": "ecb2", "group": "ecb_cut", "publisher": "The Guardian", "hours_ago": 29, "title": "ECB lowers interest rates again as eurozone inflation cools", "excerpt": "The European Central Bank cut its deposit rate by 0.25 percentage points; Christine Lagarde said inflation was moving toward target."},
+    {"id": "ecb3", "group": "ecb_cut", "publisher": "CBS News", "hours_ago": 27, "title": "European Central Bank trims interest rates, Lagarde signals caution", "excerpt": "Christine Lagarde said the ECB would decide meeting by meeting after cutting rates as eurozone inflation eased."},
+
+    {"id": "art1", "group": "artemis_crew", "publisher": "NPR", "hours_ago": 50, "title": "NASA names Artemis III crew for first crewed lunar landing in decades", "excerpt": "NASA announced the four astronauts who will fly Artemis III, the mission planned to land astronauts near the moon's south pole."},
+    {"id": "art2", "group": "artemis_crew", "publisher": "Fox News", "hours_ago": 49, "title": "Meet the Artemis III astronauts NASA picked to land on the moon", "excerpt": "NASA introduced the Artemis III crew at Johnson Space Center, including the astronauts expected to walk near the lunar south pole."},
+
+    {"id": "fire1", "group": "ca_wildfire", "publisher": "CBS News", "hours_ago": 15, "title": "Wildfire forces evacuations near Santa Barbara as winds fan flames", "excerpt": "Thousands of residents in Santa Barbara County were ordered to evacuate as the fast-moving wildfire spread toward Montecito."},
+    {"id": "fire2", "group": "ca_wildfire", "publisher": "Fox News", "hours_ago": 14, "title": "California wildfire near Santa Barbara triggers evacuation orders for Montecito", "excerpt": "Cal Fire said the wildfire had burned several thousand acres in Santa Barbara County, with evacuation orders for Montecito."},
+    {"id": "fire3", "group": "ca_wildfire", "publisher": "The Guardian", "hours_ago": 12, "title": "Santa Barbara wildfire: evacuations expand as firefighters battle winds", "excerpt": "Evacuation orders expanded in Montecito and Santa Barbara County as Cal Fire crews fought the wildfire overnight."},
+
+    {"id": "gh1", "group": "ghana_mining", "publisher": "BBC News", "hours_ago": 40, "title": "Ghana parliament approves mining royalty law raising gold levies", "excerpt": "Ghana's parliament passed a law increasing royalties on gold mining companies, a move the finance ministry says will raise revenue."},
+    {"id": "gh2", "group": "ghana_mining", "publisher": "The Guardian", "hours_ago": 38, "title": "Ghana passes mining royalty law as gold companies warn over investment", "excerpt": "Gold mining firms criticised the royalty law approved by Ghana's parliament, saying higher levies could deter investment."},
+
+    {"id": "tar1", "group": "furniture_tariff", "publisher": "Fox News", "hours_ago": 20, "title": "Trump announces 25% tariff on imported furniture to protect US manufacturers", "excerpt": "President Trump said the furniture tariff would bring manufacturing jobs back to North Carolina and other states."},
+    {"id": "tar2", "group": "furniture_tariff", "publisher": "NPR", "hours_ago": 19, "title": "Trump's new furniture tariff could raise prices, retailers warn", "excerpt": "Retailers said the 25% tariff on imported furniture announced by Trump would increase costs for consumers."},
+    {"id": "tar3", "group": "furniture_tariff", "publisher": "CBS News", "hours_ago": 18, "title": "What Trump's 25% furniture tariff means for shoppers", "excerpt": "The furniture tariff announced by President Trump applies to imported sofas, cabinets and other furniture."},
+
+    {"id": "d_trump_dinner", "group": "trump_state_dinner", "publisher": "BBC News", "hours_ago": 19, "title": "Trump hosts Japanese prime minister at White House state dinner", "excerpt": "President Trump welcomed Japan's prime minister for a state dinner, with trade and security on the agenda."},
+    {"id": "d_turkey_quake", "group": "turkey_quake", "publisher": "The Guardian", "hours_ago": 9, "title": "Earthquake strikes eastern Turkey, damaging buildings in Van province", "excerpt": "A magnitude 5.9 earthquake damaged homes in Van province, Turkey's disaster agency AFAD said."},
+    {"id": "d_boe", "group": "boe_hold", "publisher": "BBC News", "hours_ago": 28, "title": "Bank of England holds interest rates as UK inflation stays sticky", "excerpt": "The Bank of England kept rates unchanged, with Andrew Bailey saying UK inflation remained above target."},
+    {"id": "d_greece_fire", "group": "greece_wildfire", "publisher": "CBS News", "hours_ago": 13, "title": "Wildfire forces evacuations in Athens suburbs as Greece battles heatwave", "excerpt": "Greek authorities ordered evacuations near Athens as the wildfire spread during a heatwave."}
+  ],
+  "distinct_pairs": [
+    ["tar1", "d_trump_dinner", "Same person (Trump), different events: tariff announcement vs. state dinner"],
+    ["jp1", "d_turkey_quake", "Same topic (earthquake), different events: Japan vs. Turkey"],
+    ["ecb1", "d_boe", "Same topic (central bank rates), different events: ECB cut vs. Bank of England hold"],
+    ["fire1", "d_greece_fire", "Same topic (wildfire evacuations), different events: California vs. Greece"]
+  ]
+}

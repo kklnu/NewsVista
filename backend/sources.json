@@ -1,0 +1,93 @@
+{
+  "_comment": "Feeds collected every hour. 'publisher' is what users see and what the distinct-publisher count uses; several feeds can share one publisher. Starter app publishers (BBC World, NPR News, Fox News) are kept; extra feeds increase genuine cross-publisher overlap. All URLs verified reachable on 2026-10-20. 'category' is the feed section (top, world, politics, us) used for the app's category chips.",
+  "sources": [
+    {
+      "id": "bbc-world",
+      "publisher": "BBC News",
+      "name": "BBC World",
+      "feed_url": "https://feeds.bbci.co.uk/news/world/rss.xml",
+      "homepage": "https://www.bbc.com/news",
+      "category": "world"
+    },
+    {
+      "id": "bbc-top",
+      "publisher": "BBC News",
+      "name": "BBC Top Stories",
+      "feed_url": "https://feeds.bbci.co.uk/news/rss.xml",
+      "homepage": "https://www.bbc.com/news",
+      "category": "top"
+    },
+    {
+      "id": "npr-news",
+      "publisher": "NPR",
+      "name": "NPR News",
+      "feed_url": "https://feeds.npr.org/1001/rss.xml",
+      "homepage": "https://www.npr.org",
+      "category": "top"
+    },
+    {
+      "id": "npr-world",
+      "publisher": "NPR",
+      "name": "NPR World",
+      "feed_url": "https://feeds.npr.org/1004/rss.xml",
+      "homepage": "https://www.npr.org",
+      "category": "world"
+    },
+    {
+      "id": "npr-politics",
+      "publisher": "NPR",
+      "name": "NPR Politics",
+      "feed_url": "https://feeds.npr.org/1014/rss.xml",
+      "homepage": "https://www.npr.org",
+      "category": "politics"
+    },
+    {
+      "id": "fox-latest",
+      "publisher": "Fox News",
+      "name": "Fox News Latest",
+      "feed_url": "https://moxie.foxnews.com/google-publisher/latest.xml",
+      "homepage": "https://www.foxnews.com",
+      "category": "top"
+    },
+    {
+      "id": "fox-world",
+      "publisher": "Fox News",
+      "name": "Fox News World",
+      "feed_url": "https://moxie.foxnews.com/google-publisher/world.xml",
+      "homepage": "https://www.foxnews.com",
+      "category": "world"
+    },
+    {
+      "id": "fox-politics",
+      "publisher": "Fox News",
+      "name": "Fox News Politics",
+      "feed_url": "https://moxie.foxnews.com/google-publisher/politics.xml",
+      "homepage": "https://www.foxnews.com",
+      "category": "politics"
+    },
+    {
+      "id": "guardian-world",
+      "publisher": "The Guardian",
+      "name": "Guardian World",
+      "feed_url": "https://www.theguardian.com/world/rss",
+      "homepage": "https://www.theguardian.com",
+      "category": "world"
+    },
+    {
+      "id": "guardian-us",
+      "publisher": "The Guardian",
+      "name": "Guardian US News",
+      "feed_url": "https://www.theguardian.com/us-news/rss",
+      "homepage": "https://www.theguardian.com",
+      "category": "us"
+    },
+    {
+      "id": "cbs-latest",
+      "publisher": "CBS News",
+      "name": "CBS News Latest",
+      "feed_url": "https://www.cbsnews.com/latest/rss/main",
+      "homepage": "https://www.cbsnews.com",
+      "category": "top"
+    }
+  ]
+}

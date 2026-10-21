@@ -1,0 +1,19 @@
+{
+  "provider": "google-gemini",
+  "endpoint": "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent",
+  "model": "gemini-3.6-flash",
+  "fallback_models": [
+    "gemini-3.5-flash-lite",
+    "gemini-3.8-flash"
+  ],
+  "prompt_version": "analysis-v3",
+  "system_prompt_file": "analysis_system_prompt.md",
+  "temperature": 0.2,
+  "max_output_tokens": 8192,
+  "request_timeout_seconds": 90,
+  "max_articles_per_story": 8,
+  "max_chars_per_article": 1800,
+  "seconds_between_calls": 7,
+  "thinking_level": "low",
+  "_note": "gemini-2.5-flash was retired for new API keys (HTTP 404, verified 2026-10-21). Models are tried in order; overloaded (503), quota (429), timeout or unavailable (404) moves on to the next model."
+}

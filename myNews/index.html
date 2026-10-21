@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>myNews</title>
+  <link rel="stylesheet" href="style.css?v=30">
+</head>
+<body>
+  <header>
+    <h1>myNews</h1>
+    <nav>
+      <button id="keywordsButton" type="button">Keywords</button>
+      <button id="refreshButton" type="button">Refresh sources</button>
+      <button id="clearAllButton" type="button">Clear all</button>
+    </nav>
+    <div id="dayButtons" class="dayButtons" aria-label="Article days"></div>
+    <div id="sourceFilterButtons" class="sourceFilterButtons" aria-label="Filter by source"></div>
+  </header>
+
+  <main>
+    <section id="keywordsPanel" class="panel" hidden>
+      <h2>Keywords</h2>
+      <p id="keywordList"></p>
+    </section>
+
+    <p id="status"></p>
+    <section id="headlines"></section>
+  </main>
+
+  <script src="app.js?v=30"></script>
+</body>
+</html>
