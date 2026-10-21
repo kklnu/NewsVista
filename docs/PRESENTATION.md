@@ -1,44 +1,65 @@
 # NewsVista: 6-minute presentation script and checklist
 
-## Before class (the night before + 15 min before)
-- [ ] Phone: Do Not Disturb ON, notifications hidden, brightness up, font size normal, battery > 60%.
-- [ ] Phone Link open on the laptop and mirroring the phone screen. Rehearse once.
-- [ ] Open the app once 2–3 minutes before presenting, so the free Render server is awake.
-- [ ] Browser tabs ready: GitHub Actions run list · `https://YOUR-API/status` · Render dashboard · Supabase table view.
-- [ ] Backup: a screen recording of one full app run, in case the Wi-Fi fails.
+## Links to have open (browser tabs, in this order)
+1. **App (web version):** https://kklnu.github.io/NewsVista/  (also on your iPhone home screen)
+2. **Server status / evidence:** https://newsvista-api.onrender.com/status
+3. **Scheduled runs:** https://github.com/kklnu/NewsVista/actions
+4. **API docs:** https://newsvista-api.onrender.com/docs
+5. **Code:** https://github.com/kklnu/NewsVista
+6. *(Backup)* Android emulator with the release APK, if asked about the native build
 
-## Script (≈ 6 min)
-**0:00 Problem (30 s).** "Readers visit several sites to compare coverage of one event. NewsVista
-shows one card per event, with each publisher's original article, background, and a labelled AI
-analysis."
+## 10 minutes before
+- [ ] Open the app link once (wakes the free server; first load can take ~50 s).
+- [ ] iPhone: Do Not Disturb ON, brightness up. Open NewsVista from the home screen.
+- [ ] If showing the iPhone on the laptop: start the AirPlay receiver (e.g. LetsView) and mirror.
+- [ ] Check `/status` shows a recent "Last successful collection".
 
-**0:30 Architecture (60 s).** Show the README diagram. "The hourly worker runs on our server, not in
-the app: fetch 11 feeds from 5 publishers, drop anything older than 168 hours, group articles, call
-Gemini only when a story's inputs change, then find Wikipedia background. Everything is stored in
-Supabase. The Flutter app only reads `/stories`."
+## Script (~6 min)
+**0:00 Problem (30 s).** "The same event is covered by many outlets. Readers jump between sites
+to compare. NewsVista shows **one card per event**, with each publisher's original article,
+background links, and an AI analysis that is clearly labelled."
 
-**1:30 Live app on phone via Phone Link (2 min 30 s).**
-1. Home: point out "News collected X min ago", newest first, the publisher counts, and pull to refresh.
-2. Switch to **Multi-source** and open a 3-publisher story.
-3. Overview label (AI-generated vs. publisher excerpt). **Original coverage:** tap one publisher, the
-   browser opens, press Back, and you return to the same story.
-4. **Background:** tap a Wikipedia link, then Back. Show a story with "No background resource available".
-5. **View AI analysis:** point out the AI-generated label and time, the citations [1][2], the
-   agree/differ/uncertain sections, and the input-scope disclosure. Open a perspective, tap
-   "Switch viewpoint", then Back.
+**0:30 How it works (60 s).** Use the diagram in `docs/HOW_IT_WORKS.md`:
+"Every hour GitHub Actions calls our Python server on Render. The server reads RSS feeds from BBC,
+NPR, Fox News, The Guardian and CBS, removes duplicates and anything older than 7 days, groups
+articles about the same event, asks Google Gemini for an analysis only when a story changed, finds
+Wikipedia background, and saves everything in a Supabase database. The app only **reads** those
+saved results. It never calls the news sites or the AI itself, so one AI summary is shared by
+everyone."
 
-**4:00 Evidence of the server (60 s).** GitHub Actions: two scheduled runs. `/status`: the same runs
-with `trigger: schedule`, plus counts and per-feed results. In-app **About → Server collection log**.
+**1:30 Live demo (2 min 30 s).**
+1. Home: "Updated X min ago", 230+ stories, **TOP STORY** covered by 4 publishers, the publisher
+   badges, the **Multi-source** filter.
+2. Open the top story. **Overview:** Quick Summary labelled *AI-generated* (or *Publisher excerpt*),
+   Key Details with citations.
+3. **Sources tab:** one card per publisher that covered it. Tap one, the original article opens, go back.
+4. **Background tab:** Wikipedia cards. Mention: "If nothing clearly matches, it says *No background
+   resource available* instead of a random link."
+5. **AI Analysis tab:** AI-generated label + time, citations [1][2], Agreement / Disagreement /
+   Uncertainty, a **Viewpoint** (e.g. NFL vs. the players' union), and the input-scope note
+   ("only RSS excerpts").
+6. **Ask AI:** tap the purple button and ask "What led up to this?". Show the answer with citations.
 
-**5:00 Shared results (30 s).** "Two phones opening this story get the same `analysis_id` and
-`generated_at`. GET requests never call the model, and our test proves the call count stays at 1."
+**4:00 Proof it's a real server (60 s).** Show `/status`: the run log with times, article counts,
+`trigger: schedule` runs (hourly, no app open), and AI call counts. Show GitHub Actions runs.
 
-**5:30 Honesty & limits (30 s).** "Failed or outdated AI is labelled, never faked. Expired sources
-disappear right away. A known grouping mistake: digest headlines. One AI mistake we fixed: ..."
+**5:00 Shared results + honesty (40 s).** "Two people opening the same story see the same stored
+analysis (same id and time); opening it never calls the AI again. If the AI or a feed fails, the app
+says so instead of showing made-up text. Old news (7+ days) disappears automatically."
+
+**5:40 Limits + AI use (20 s).** "Grouping can merge digest headlines; AI only sees short excerpts.
+I built this with an AI coding assistant (Claude Code), and then tested and verified it myself."
 
 **6:00 Questions.**
 
-## Likely questions
-- *How do you prevent duplicates?* Normalized URL → hash ID, plus a unique constraint, so a re-fetch updates the row.
-- *Why not group by keyword?* One shared word isn't enough. We use TF-IDF similarity plus a shared specific name, at most 72 h apart.
-- *What if Gemini is down?* The status shows "unavailable", original sources still work, and the next run retries.
+## Likely questions (short answers)
+- **Why web on the iPhone?** iPhone apps need a Mac to build, and Phone Link can't mirror iPhones.
+  The same Flutter code is built as an Android APK (the required native client); the web version is
+  an extra.
+- **How do you stop duplicates?** Each article's link is cleaned and turned into an ID; fetching it
+  again updates the same row.
+- **How do you know two articles are the same event?** They must share specific names, have similar
+  wording, and be published within 72 hours. One shared keyword isn't enough.
+- **What if Gemini is down?** The status says "unavailable", the sources still work, and the next
+  hourly run retries (with backup models).
+- **Cost?** $0. Everything runs on free tiers.
